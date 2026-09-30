@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Concilia — pedidos e estoque</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./stock_reconciler.js"></script>
+  <script defer src="./stock-tool.js"></script>
+</head>
+<body class="product-body">
+  <main class="product-wrap">
+    <nav class="product-nav"><a class="brand-inline" href="./index.html"><span class="brand-mark">✦</span> ORBIT<span>LAB</span></a><a class="link-muted" href="./index.html">← Voltar à oferta</a></nav>
+    <div class="tool-hero"><div><div class="eyebrow">FERRAMENTA FUNCIONAL · PROCESSAMENTO LOCAL</div><h1>Concilie pedidos e estoque em minutos.</h1><p>Carregue dois arquivos CSV para identificar SKUs sem cadastro, pedidos acima do saldo e o estoque projetado. O processamento acontece neste navegador.</p></div><div class="tool-hero-orb" aria-hidden="true"><span>CSV</span><b>↔</b><span>RELATÓRIO</span></div></div>
+    <div class="tool-grid">
+      <section class="panel upload-card"><div class="step-number">01 / ESTOQUE</div><h2>Arquivo de estoque</h2><p>Colunas necessárias: <code>SKU</code> e <code>Estoque</code> ou <code>Quantidade</code>.</p><label class="file-picker">Selecionar CSV de estoque<input id="stockFile" type="file" accept=".csv,text/csv"></label><small id="stockName">Nenhum arquivo selecionado</small></section>
+      <section class="panel upload-card"><div class="step-number">02 / PEDIDOS</div><h2>Arquivo de pedidos</h2><p>Colunas necessárias: <code>SKU</code> e <code>Vendido</code> ou <code>Quantidade</code>.</p><label class="file-picker">Selecionar CSV de pedidos<input id="ordersFile" type="file" accept=".csv,text/csv"></label><small id="ordersName">Nenhum arquivo selecionado</small></section>
+    </div>
+    <div class="tool-actions"><button class="btn btn-primary" id="process" type="button">Gerar relatório <span>↗</span></button><span class="quiet">Formatos CSV com vírgula ou ponto e vírgula</span></div>
+    <div id="toolStatus" role="status" class="tool-status" aria-live="polite">Aguardando arquivos para iniciar.</div>
+    <section class="panel result-panel" id="resultPanel" hidden>
+      <div class="section-head"><div><div class="eyebrow">RESULTADO</div><h2>Conciliação concluída</h2></div><button id="download" class="btn btn-outline" type="button">Baixar relatório CSV ↓</button></div>
+      <div class="result-stats"><div><strong id="totalSkus">0</strong><span>SKUs analisados</span></div><div><strong id="exceptions">0</strong><span>Divergências</span></div><div><strong id="orderUnits">0</strong><span>Unidades em pedidos</span></div></div>
+      <div class="table-scroll"><table><thead><tr><th>SKU</th><th>Estoque inicial</th><th>Pedidos</th><th>Saldo projetado</th><th>Situação</th></tr></thead><tbody id="resultRows"></tbody></table></div>
+    </section>
+    <p class="tool-footnote">A ferramenta calcula divergências a partir dos arquivos fornecidos. Confira unidades, devoluções e outros movimentos antes de atualizar qualquer sistema de estoque. Nenhum arquivo é enviado ao servidor.</p>
+  </main>
+</body>
+</html>
